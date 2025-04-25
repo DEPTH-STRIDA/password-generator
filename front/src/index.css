@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Cattedrale";
+  src: url("./assets/font/Cattedrale-Regular.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Troika";
+  src: url("./assets/font/troika.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}

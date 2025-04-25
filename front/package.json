@@ -1,0 +1,41 @@
+{
+  "name": "front",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@heroicons/react": "^2.2.0",
+    "@mui/material": "^6.4.7",
+    "@react-three/fiber": "^7.0.29",
+    "@types/react-select": "^5.0.0",
+    "@types/three": "^0.148.1",
+    "@types/yup": "^0.29.14",
+    "axios": "^1.8.4",
+    "date-fns": "^4.1.0",
+    "formik": "^2.4.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-quill": "^2.0.0",
+    "react-router-dom": "^7.5.0",
+    "react-select": "^5.10.1",
+    "react-tooltip": "^5.28.0",
+    "three": "^0.148.0",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "latest",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "vite": "latest"
+  }
+}
