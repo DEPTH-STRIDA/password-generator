@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   random_static_header,
   voronoi_falt_header,
@@ -7,6 +7,12 @@ import {
 } from "../assets/img";
 import PasswordItem from "./PasswordItem";
 import CustomCheckbox from "./CustomCheckbox";
+import NumberInput from "./NumberInput";
+import CharacterButton from "./CharacterButton";
+
+const SPECIAL_CHARS_ROW1 = ["!", "#", "$", "%", "&", "(", ")", "*", "+"];
+const SPECIAL_CHARS_ROW2 = [".", "/", ":", ";", "=", ">", "?", "@", "["];
+const SPECIAL_CHARS_ROW3 = ["\\", "]", "^", "`", "{", "|", "}", "~"];
 
 const Body: React.FC = () => {
   const [checkboxStates, setCheckboxStates] = useState({
@@ -15,6 +21,55 @@ const Body: React.FC = () => {
     numbers: true,
     special: false
   });
+
+  const [passwordLength, setPasswordLength] = useState(10);
+  const [passwordCount, setPasswordCount] = useState(10);
+  const [activeChars, setActiveChars] = useState<Set<string>>(
+    new Set([...SPECIAL_CHARS_ROW1, ...SPECIAL_CHARS_ROW2, ...SPECIAL_CHARS_ROW3])
+  );
+  const [savedActiveChars, setSavedActiveChars] = useState<Set<string>>(
+    new Set([...SPECIAL_CHARS_ROW1, ...SPECIAL_CHARS_ROW2, ...SPECIAL_CHARS_ROW3])
+  );
+  const [isWarningVisible, setIsWarningVisible] = useState(false);
+
+  // Обработка включения/выключения специальных символов
+  useEffect(() => {
+    if (checkboxStates.special) {
+      // Восстанавливаем сохраненный выбор символов
+      setActiveChars(new Set(savedActiveChars));
+    } else {
+      // Сохраняем текущий выбор перед выключением
+      setSavedActiveChars(new Set(activeChars));
+    }
+  }, [checkboxStates.special]);
+
+  const handleWarning = () => {
+    setIsWarningVisible(true);
+    setTimeout(() => setIsWarningVisible(false), 1000);
+  };
+
+  const handleCharClick = (char: string) => {
+    if (!checkboxStates.special) {
+      handleWarning();
+      return;
+    }
+
+    const newSet = new Set(activeChars);
+    if (newSet.has(char)) {
+      newSet.delete(char);
+    } else {
+      newSet.add(char);
+    }
+    setActiveChars(newSet);
+    setSavedActiveChars(newSet); // Сохраняем состояние при каждом изменении
+  };
+
+  const handleSpecialCheckboxChange = () => {
+    setCheckboxStates(prev => ({
+      ...prev,
+      special: !prev.special
+    }));
+  };
 
   const handleCheckboxChange = (key: keyof typeof checkboxStates) => {
     setCheckboxStates(prev => ({
@@ -38,8 +93,8 @@ const Body: React.FC = () => {
         }}
       />
 
-      <div className="flex justify-center items-start z-30 mt-[40px] gap-[105px]">
-        <div className="flex flex-col justify-center items-start">
+      <div className="flex justify-center items-start z-30 mt-[40px] gap-[75px] relative">
+        <div className="flex flex-col justify-center items-start relative">
           <div className="relative">
             <div className="absolute top-[50%] left-[-35px] w-[406px] h-[1px] bg-primary-green"></div>
             <div className="absolute top-[25%] left-[-21px] w-[1px] h-[43px] bg-primary-green"></div>
@@ -55,24 +110,22 @@ const Body: React.FC = () => {
           <p className="text-primary-white font-normal font-Troika text-[20px] mt-[23px]">
             ДЛИНА ПАРОЛЯ
           </p>
-          <div className="flex flex-row justify-start items-center gap-[16px] mt-[11px]">
-            <div className="w-[55px] h-[25px] bg-primary-gray rounded-[6px] text-primary-white font-normal font-Troika text-[20px] flex justify-center items-center">
-              11
-            </div>
-            <p className="text-primary-red font-normal font-Troika text-[20px]">
-              МАКСИМУМ 100
-            </p>
+          <div className="mt-[11px] relative">
+            <NumberInput
+              value={passwordLength}
+              onChange={setPasswordLength}
+              maxValue={100}
+            />
           </div>
           <p className="text-primary-white font-normal font-Troika text-[20px] mt-[11px]">
             КОЛИЧЕСТВО ПАРОЛЕЙ
           </p>
-          <div className="flex flex-row justify-start items-center gap-[16px] mt-[11px]">
-            <div className="w-[55px] h-[25px] bg-primary-gray rounded-[6px] text-primary-white font-normal font-Troika text-[20px] flex justify-center items-center">
-              11
-            </div>
-            <p className="text-primary-red font-normal font-Troika text-[20px]">
-              МАКСИМУМ 50
-            </p>
+          <div className="mt-[11px] relative">
+            <NumberInput
+              value={passwordCount}
+              onChange={setPasswordCount}
+              maxValue={50}
+            />
           </div>
           <p className="text-primary-white font-normal font-Troika text-[20px] mt-[20px]">
             СИМВОЛЫ В ПАРОЛЕ
@@ -126,10 +179,11 @@ const Body: React.FC = () => {
           <div className="flex flex-row justify-start items-center gap-[20px] mt-[11px]">
             <CustomCheckbox 
               checked={checkboxStates.special}
-              onChange={() => handleCheckboxChange('special')}
+              onChange={handleSpecialCheckboxChange}
             />
             <div className="flex flex-col justify-center items-start">
-              <p className="text-primary-white font-normal font-Troika text-[20px] uppercase">
+              <p className={`text-primary-white font-normal font-Troika text-[20px] uppercase
+                ${isWarningVisible ? 'animate-pulse text-primary-red' : ''}`}>
                 Специальные символы
               </p>
               <p className="text-primary-green font-Cydre font-black text-[14px] lowercase">
@@ -144,25 +198,39 @@ const Body: React.FC = () => {
 
           <div className="flex flex-col justify-center items-start gap-[8px] mt-[11px]">
             <div className="flex flex-row justify-center items-center gap-[8px]">
-              {["!", "#", "$", "%", "&", "(", ")", "*", "+", ".", "/", ":", ";"].map((char) => (
-                <div
+              {SPECIAL_CHARS_ROW1.map((char) => (
+                <CharacterButton
                   key={char}
-                  className="w-[30px] h-[30px] bg-primary-green rounded-[6px]
-                  font-Troika text-[20px] text-primary-white flex justify-center items-center"
-                >
-                  {char}
-                </div>
+                  char={char}
+                  isActive={activeChars.has(char)}
+                  isEnabled={checkboxStates.special}
+                  onClick={() => handleCharClick(char)}
+                  onHover={handleWarning}
+                />
               ))}
             </div>
             <div className="flex flex-row justify-center items-center gap-[8px]">
-              {["=", ">", "?", "@", "[", "\\", "]", "^", "`", "{", "|", "}", "~"].map((char) => (
-                <div
+              {SPECIAL_CHARS_ROW2.map((char) => (
+                <CharacterButton
                   key={char}
-                  className="w-[30px] h-[30px] bg-primary-green rounded-[6px]
-                  font-Troika text-[20px] text-primary-white flex justify-center items-center"
-                >
-                  {char}
-                </div>
+                  char={char}
+                  isActive={activeChars.has(char)}
+                  isEnabled={checkboxStates.special}
+                  onClick={() => handleCharClick(char)}
+                  onHover={handleWarning}
+                />
+              ))}
+            </div>
+            <div className="flex flex-row justify-center items-center gap-[8px]">
+              {SPECIAL_CHARS_ROW3.map((char) => (
+                <CharacterButton
+                  key={char}
+                  char={char}
+                  isActive={activeChars.has(char)}
+                  isEnabled={checkboxStates.special}
+                  onClick={() => handleCharClick(char)}
+                  onHover={handleWarning}
+                />
               ))}
             </div>
           </div>
