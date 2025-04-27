@@ -3,11 +3,13 @@ import voronoi_falt_header from "./voronoi_falt_header.png";
 import grung from "./grung.png";
 import light from "./light.png";
 import God_ray from "./God_ray.png";
+import marble from "./marble.png";
 
 export {
   random_static_header,
   voronoi_falt_header,
   light,
   grung,
-  God_ray
+  God_ray,
+  marble
 };

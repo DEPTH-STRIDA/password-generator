@@ -17,6 +17,7 @@ export default {
       fontFamily: {
         'Troika': ['Troika', 'sans-serif'],
         'Cattedrale': ['Cattedrale', 'sans-serif'],
+        'Cydre': ['Cydre', 'sans-serif'],
       },
       boxShadow: {},
     },

@@ -15,3 +15,10 @@
   font-weight: 300;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Cydre";
+  src: url("./assets/font/Cygre.ttf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
