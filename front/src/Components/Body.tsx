@@ -148,7 +148,7 @@ const Body: React.FC = () => {
         }}
       />
 
-      <div className="flex justify-center items-start z-30 mt-[0.78vw] gap-[3.91vw] relative">
+      <div className="flex justify-center items-start z-30 mt-[0.78vw] gap-[7.91vw] relative">
         <div className="flex flex-col justify-center items-start relative">
           <div className="relative">
             <div className="absolute top-[50%] left-[-1.82vw] w-[21.15vw] h-[0.052vw] bg-primary-green"></div>
