@@ -138,124 +138,124 @@ const Body: React.FC = () => {
     <div className="bg-primary-black min-h-[100vh] w-full">
       <div
         className="fixed left-0 right-0 bottom-0 mix-blend-overlay opacity-[85%] z-0
-        top-[130px]"
+        top-[6.77vw]"
         style={{
           backgroundImage: `url(${marble})`,
           backgroundRepeat: "repeat-x",
-          backgroundSize: "1920px 1920px",
+          backgroundSize: "100vw 100vw",
           backgroundPosition: "center",
-          filter: "blur(4px)",
-          //   WebkitFilter: 'blur(4px)',
+          filter: "blur(0.21vw)",
         }}
       />
 
-      <div className="flex justify-center items-start z-30 mt-[15px] gap-[75px] relative">
+      <div className="flex justify-center items-start z-30 mt-[0.78vw] gap-[3.91vw] relative">
         <div className="flex flex-col justify-center items-start relative">
           <div className="relative">
-            <div className="absolute top-[50%] left-[-35px] w-[406px] h-[1px] bg-primary-green"></div>
-            <div className="absolute top-[25%] left-[-21px] w-[1px] h-[43px] bg-primary-green"></div>
-            <div className="absolute top-[25%] right-[-55px] w-[1px] h-[43px] bg-primary-green"></div>
+            <div className="absolute top-[50%] left-[-1.82vw] w-[21.15vw] h-[0.052vw] bg-primary-green"></div>
+            <div className="absolute top-[25%] left-[-1.09vw] w-[0.052vw] h-[2.24vw] bg-primary-green"></div>
+            <div className="absolute top-[25%] right-[-2.86vw] w-[0.052vw] h-[2.24vw] bg-primary-green"></div>
 
             <h1
-              className="uppercase font-normal bg-gradient-to-b  text-transparent font-Cattedrale bg-clip-text from-primary-white from-[50%] to-primary-green to-[50%]
-          text-[40px]"
+              className="uppercase font-normal bg-gradient-to-b text-transparent font-Cattedrale bg-clip-text from-primary-white from-[50%] to-primary-green to-[50%]
+          text-[2.08vw]"
             >
               Генератор паролей
             </h1>
           </div>
-          <p className="text-primary-white font-normal font-Troika text-[20px] mt-[11px]">
+          
+          <p className="text-primary-white font-normal font-Troika text-[1.04vw] mt-[0.57vw]">
             ДЛИНА ПАРОЛЯ
           </p>
-          <div className="mt-[5px] relative">
+          <div className="mt-[0.26vw] relative">
             <NumberInput
               value={passwordLength}
               onChange={setPasswordLength}
               maxValue={100}
             />
           </div>
-          <p className="text-primary-white font-normal font-Troika text-[20px] mt-[11px]">
+          <p className="text-primary-white font-normal font-Troika text-[1.04vw] mt-[0.57vw]">
             КОЛИЧЕСТВО ПАРОЛЕЙ
           </p>
-          <div className="mt-[5px] relative">
+          <div className="mt-[0.26vw] relative">
             <NumberInput
               value={passwordCount}
               onChange={setPasswordCount}
               maxValue={50}
             />
           </div>
-          <p className="text-primary-white font-normal font-Troika text-[20px] mt-[20px]">
+          <p className="text-primary-white font-normal font-Troika text-[1.04vw] mt-[1.04vw]">
             СИМВОЛЫ В ПАРОЛЕ
           </p>
 
-          <div className="flex flex-row justify-start items-center gap-[20px] mt-[5px]">
+          <div className="flex flex-row justify-start items-center gap-[1.04vw] mt-[0.26vw]">
             <CustomCheckbox
               checked={checkboxStates.uppercase}
               onChange={() => handleCheckboxChange("uppercase")}
             />
             <div className="flex flex-col justify-center items-start">
-              <p className="text-primary-white font-normal font-Troika text-[20px] uppercase">
+              <p className="text-primary-white font-normal font-Troika text-[1.04vw] uppercase">
                 Прописные Латинские бувы
               </p>
-              <p className="text-primary-green font-Cydre font-black text-[14px] uppercase">
+              <p className="text-primary-green font-Cydre font-black text-[0.73vw] uppercase">
                 ABCDEFGHIJKLMNOPQRSTUVWXYZ
               </p>
             </div>
           </div>
 
-          <div className="flex flex-row justify-start items-center gap-[20px] mt-[11px]">
+          <div className="flex flex-row justify-start items-center gap-[1.04vw] mt-[0.57vw]">
             <CustomCheckbox
               checked={checkboxStates.lowercase}
               onChange={() => handleCheckboxChange("lowercase")}
             />
             <div className="flex flex-col justify-center items-start">
-              <p className="text-primary-white font-normal font-Troika text-[20px] uppercase">
+              <p className="text-primary-white font-normal font-Troika text-[1.04vw] uppercase">
                 Строчные Латинские бувы
               </p>
-              <p className="text-primary-green font-Cydre font-black text-[14px] lowercase">
+              <p className="text-primary-green font-Cydre font-black text-[0.73vw] lowercase">
                 abcdefghijklmnopqrstuvwxyz
               </p>
             </div>
           </div>
 
-          <div className="flex flex-row justify-start items-center gap-[20px] mt-[11px]">
+          <div className="flex flex-row justify-start items-center gap-[1.04vw] mt-[0.57vw]">
             <CustomCheckbox
               checked={checkboxStates.numbers}
               onChange={() => handleCheckboxChange("numbers")}
             />
             <div className="flex flex-col justify-center items-start">
-              <p className="text-primary-white font-normal font-Troika text-[20px] uppercase">
+              <p className="text-primary-white font-normal font-Troika text-[1.04vw] uppercase">
                 Цифры
               </p>
-              <p className="text-primary-green font-Cydre font-black text-[14px] lowercase">
+              <p className="text-primary-green font-Cydre font-black text-[0.73vw] lowercase">
                 0123456789
               </p>
             </div>
           </div>
 
-          <div className="flex flex-row justify-start items-center gap-[20px] mt-[11px]">
+          <div className="flex flex-row justify-start items-center gap-[1.04vw] mt-[0.57vw]">
             <CustomCheckbox
               checked={checkboxStates.special}
               onChange={handleSpecialCheckboxChange}
             />
             <div className="flex flex-col justify-center items-start">
               <p
-                className={`text-primary-white font-normal font-Troika text-[20px] uppercase
+                className={`text-primary-white font-normal font-Troika text-[1.04vw] uppercase
                 ${isWarningVisible ? "animate-pulse text-primary-red" : ""}`}
               >
                 Специальные символы
               </p>
-              <p className="text-primary-green font-Cydre font-black text-[14px] lowercase">
+              <p className="text-primary-green font-Cydre font-black text-[0.73vw] lowercase">
                 {"!#$%&()*+./:;=>?@[\\]^`{|}~'\\"}
               </p>
             </div>
           </div>
 
-          <p className="text-primary-white font-normal font-Troika text-[20px] mt-[23px]">
+          <p className="text-primary-white font-normal font-Troika text-[1.04vw] mt-[1.2vw]">
             СИМВОЛЫ НА ВЫБОР
           </p>
 
-          <div className="flex flex-col justify-center items-start gap-[8px] mt-[11px]">
-            <div className="flex flex-row justify-center items-center gap-[8px]">
+          <div className="flex flex-col justify-center items-start gap-[0.42vw] mt-[0.57vw]">
+            <div className="flex flex-row justify-center items-center gap-[0.42vw]">
               {SPECIAL_CHARS_ROW1.map((char) => (
                 <CharacterButton
                   key={char}
@@ -267,7 +267,7 @@ const Body: React.FC = () => {
                 />
               ))}
             </div>
-            <div className="flex flex-row justify-center items-center gap-[8px]">
+            <div className="flex flex-row justify-center items-center gap-[0.42vw]">
               {SPECIAL_CHARS_ROW2.map((char) => (
                 <CharacterButton
                   key={char}
@@ -279,7 +279,7 @@ const Body: React.FC = () => {
                 />
               ))}
             </div>
-            <div className="flex flex-row justify-center items-center gap-[8px]">
+            <div className="flex flex-row justify-center items-center gap-[0.42vw]">
               {SPECIAL_CHARS_ROW3.map((char) => (
                 <CharacterButton
                   key={char}
@@ -294,16 +294,16 @@ const Body: React.FC = () => {
           </div>
 
           <div className="relative w-full">
-            <div className="absolute top-[10px] left-[-35px] w-[406px] h-[1px] bg-primary-green"></div>
-            <div className="absolute top-[-15px] left-[-21px] w-[1px] h-[43px] bg-primary-green"></div>
-            <div className="absolute top-[-20px] right-[-21px] w-[1px] h-[43px] bg-primary-green"></div>
+            <div className="absolute top-[0.52vw] left-[-1.82vw] w-[21.15vw] h-[0.052vw] bg-primary-green"></div>
+            <div className="absolute top-[-0.78vw] left-[-1.09vw] w-[0.052vw] h-[2.24vw] bg-primary-green"></div>
+            <div className="absolute top-[-1.04vw] right-[-1.09vw] w-[0.052vw] h-[2.24vw] bg-primary-green"></div>
           </div>
           <div className="flex justify-center items-center w-full">
             <button
               onClick={handleGenerate}
               disabled={isGenerating}
               className={`bg-primary-red text-primary-white font-Troika font-black 
-                text-[28px] uppercase px-[20px] py-[10px] rounded-[6px] mt-[28px]
+                text-[1.46vw] uppercase px-[1.04vw] py-[0.52vw] rounded-[0.31vw] mt-[1.46vw]
                 transition-all duration-300 ease-in-out
                 ${
                   isGenerating
@@ -312,7 +312,7 @@ const Body: React.FC = () => {
                 }`}
             >
               {isGenerating ? (
-                <div className="animate-spin rounded-full h-6 w-6 border-4 border-primary-white border-t-transparent" />
+                <div className="animate-spin rounded-full h-[0.31vw] w-[0.31vw] border-[0.21vw] border-primary-white border-t-transparent" />
               ) : (
                 "СГЕНЕРИРОВАТЬ"
               )}
@@ -321,13 +321,13 @@ const Body: React.FC = () => {
         </div>
         <div className="flex flex-col justify-center items-start">
           <div className="flex flex-col justify-center items-center">
-            <h2 className="uppercase text-primary-white font-normal font-Troika text-[32px]">
+            <h2 className="uppercase text-primary-white font-normal font-Troika text-[1.67vw]">
               Будет сгенерирован пароль вида
             </h2>
             <PasswordItem password={previewPassword} />
           </div>
 
-          <div className="flex flex-row justify-start items-center flex-wrap mt-[36px] gap-[16px] w-[930px]">
+          <div className="flex flex-row justify-start items-center flex-wrap mt-[1.88vw] gap-[0.83vw] w-[48.44vw]">
             {showPasswords &&
               generatedPasswords.map((password, index) => (
                 <div

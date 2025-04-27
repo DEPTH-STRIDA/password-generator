@@ -1,3 +1,5 @@
+import cryptoRandomString from 'crypto-random-string';
+
 interface PasswordOptions {
   length: number;
   uppercase: boolean;
@@ -26,15 +28,11 @@ export const generatePassword = (options: PasswordOptions): string => {
     charset = UPPERCASE_CHARS + LOWERCASE_CHARS + NUMBER_CHARS;
   }
 
-  let password = '';
-  const charsetLength = charset.length;
-
-  for (let i = 0; i < options.length; i++) {
-    const randomIndex = Math.floor(Math.random() * charsetLength);
-    password += charset[randomIndex];
-  }
-
-  return password;
+  // Используем crypto-random-string для генерации криптографически стойкого пароля
+  return cryptoRandomString({
+    length: options.length,
+    characters: charset
+  });
 };
 
 export const generatePasswords = (

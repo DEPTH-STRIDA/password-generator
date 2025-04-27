@@ -13,9 +13,19 @@ const Nav: React.FC = () => {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.open('https://github.com/DEPTH-STRIDA', '_blank');
+  };
+
+  const handleProjectsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.open('https://github.com/DEPTH-STRIDA?tab=repositories', '_blank');
+  };
+
   return (
-    <header 
-      className="w-full bg-red-header relative h-[160px] overflow-hidden z-10"
+    <header
+      className="w-full bg-red-header relative h-[8.33vw] overflow-hidden z-10"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -25,7 +35,7 @@ const Nav: React.FC = () => {
           style={{
             backgroundImage: `url(${random_static_header})`,
             backgroundRepeat: "repeat-x",
-            backgroundSize: "1024px 1024px",
+            backgroundSize: "53.33vw 53.33vw",
             backgroundPosition: "center",
           }}
         />
@@ -34,7 +44,7 @@ const Nav: React.FC = () => {
           style={{
             backgroundImage: `url(${voronoi_falt_header})`,
             backgroundRepeat: "repeat-x",
-            backgroundSize: "1024px 1024px",
+            backgroundSize: "53.33vw 53.33vw",
             backgroundPosition: "center",
           }}
         />
@@ -50,32 +60,32 @@ const Nav: React.FC = () => {
             backgroundRepeat: "no-repeat",
             backgroundSize: "contain",
             backgroundPosition: "center",
-            maskImage: 'linear-gradient(to bottom, black, transparent)',
-            maskSize: '100% 200%',
-            maskPosition: isHovered ? 'left top' : 'left bottom',
+            maskImage: "linear-gradient(to bottom, black, transparent)",
+            maskSize: "100% 200%",
+            maskPosition: isHovered ? "left top" : "left bottom",
           }}
         />
       </div>
 
       <nav
         className="flex items-center justify-between relative z-20 h-full
-        mr-[130px] 
-        ml-[60px]"
+        mr-[6.77vw] 
+        ml-[3.125vw]"
       >
         <div className="relative">
           {/* слева вертикальная линия */}
-          <div className="absolute top-[13px] left-[-22px] w-[64px] h-[1px] bg-primary-black"></div>
+          <div className="absolute top-[0.68vw] left-[-1.15vw] w-[3.33vw] h-[0.052vw] bg-primary-black"></div>
           {/* слева горизонтальная линия */}
-          <div className="absolute top-[-5px] -left-[4px] w-[1px] h-[50px] bg-primary-black"></div>
+          <div className="absolute top-[-0.26vw] -left-[0.21vw] w-[0.052vw] h-[2.6vw] bg-primary-black"></div>
           {/* справа вертикальная линия */}
-          <div className="absolute bottom-[20px] right-[-70px] w-[528px] h-[1px] bg-primary-black"></div>
+          <div className="absolute bottom-[1.04vw] right-[-3.65vw] w-[27.5vw] h-[0.052vw] bg-primary-black"></div>
           {/* справа горизонтальная линия */}
-          <div className="absolute bottom-[0px] right-[-15px] w-[1px] h-[90px] bg-primary-black"></div>
+          <div className="absolute bottom-[0vw] right-[-0.78vw] w-[0.052vw] h-[4.69vw] bg-primary-black"></div>
           <Link
             to="/"
             className="uppercase cursor-pointer relative
             font-Cattedrale text-primary-black
-            text-[64px]"
+            text-[3.33vw]"
           >
             Golang Developer
           </Link>
@@ -83,16 +93,17 @@ const Nav: React.FC = () => {
 
         <ul
           className="font-Cattedrale font-normal text-primary-black flex
-          text-[40px]
-          space-x-[80px]"
+          text-[2.08vw]
+          space-x-[4.17vw]"
         >
           <li>
-            <a 
-              href="#" 
+            <a
+              href="https://github.com/DEPTH-STRIDA"
+              onClick={handleAboutClick}
               className="hover:text-gray-900"
               onMouseEnter={() => {
                 setIsAnimating(true);
-                setHoveredButton('about');
+                setHoveredButton("about");
               }}
               onMouseLeave={() => {
                 setIsAnimating(true);
@@ -101,28 +112,30 @@ const Nav: React.FC = () => {
             >
               <div className="relative">
                 {/* слева вертикальная линия */}
-                <div className="absolute top-[8px] left-[-24px] w-[36px] h-[1px] bg-primary-black"></div>
+                <div className="absolute top-[0.42vw] left-[-1.25vw] w-[1.875vw] h-[0.052vw] bg-primary-black"></div>
                 {/* слева горизонтальная линия */}
-                <div className="absolute top-[-5px] -left-[8px] w-[1px] h-[50px] bg-primary-black"></div>
+                <div className="absolute top-[-0.26vw] -left-[0.42vw] w-[0.052vw] h-[2.6vw] bg-primary-black"></div>
                 {/* справа вертикальная линия */}
-                <div className="absolute bottom-[6px] right-[-32px] w-[36px] h-[1px] bg-primary-black"></div>
+                <div className="absolute bottom-[0.31vw] right-[-1.67vw] w-[1.875vw] h-[0.052vw] bg-primary-black"></div>
                 {/* справа горизонтальная линия */}
-                <div className="absolute bottom-[-10px] right-[-15px] w-[1px] h-[50px] bg-primary-black"></div>
+                <div className="absolute bottom-[-0.52vw] right-[-0.78vw] w-[0.052vw] h-[2.6vw] bg-primary-black"></div>
                 <div className="relative">
-                  <div 
-                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[161px] h-[80px] transition-opacity duration-300`}
+                  <div
+                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[8.385vw] h-[4.17vw] transition-opacity duration-300`}
                     style={{
                       background: `url(${God_ray})`,
-                      backgroundSize: '161px 87px',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: "8.385vw 4.53vw",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
                       zIndex: -1,
-                      opacity: hoveredButton === 'about' ? 1 : 0,
-                      transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
-                      transform: hoveredButton === 'about' 
-                        ? 'translate(-50%, -50%) scale(1)' 
-                        : 'translate(-50%, -50%) scale(0.95)'
-                    }} 
+                      opacity: hoveredButton === "about" ? 1 : 0,
+                      transition:
+                        "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
+                      transform:
+                        hoveredButton === "about"
+                          ? "translate(-50%, -50%) scale(1)"
+                          : "translate(-50%, -50%) scale(0.95)",
+                    }}
                   />
                   Обо мне
                 </div>
@@ -130,12 +143,13 @@ const Nav: React.FC = () => {
             </a>
           </li>
           <li>
-            <a 
-              href="#" 
+            <a
+              href="https://github.com/DEPTH-STRIDA?tab=repositories"
+              onClick={handleProjectsClick}
               className="hover:text-gray-900"
               onMouseEnter={() => {
                 setIsAnimating(true);
-                setHoveredButton('projects');
+                setHoveredButton("projects");
               }}
               onMouseLeave={() => {
                 setIsAnimating(true);
@@ -143,26 +157,28 @@ const Nav: React.FC = () => {
               }}
             >
               <div className="relative">
-                <div className="absolute top-[8px] left-[-10px] w-[36px] h-[1px] bg-primary-black"></div>
-                <div className="absolute bottom-[-1px] -left-[4px] w-[1px] h-[30px] rotate-[53deg] bg-primary-black"></div>
-                <div className="absolute bottom-[-1px] -left-[4px] w-[1px] h-[30px] rotate-[-42deg] bg-primary-black"></div>
-                <div className="absolute top-[1px] -right-[4px] w-[1px] h-[30px] rotate-[-31deg] bg-primary-black"></div>
-                <div className="absolute top-[2px] -right-[4px] w-[1px] h-[30px] rotate-[55deg] bg-primary-black"></div>
+                <div className="absolute top-[0.42vw] left-[-0.52vw] w-[1.875vw] h-[0.052vw] bg-primary-black"></div>
+                <div className="absolute bottom-[-0.052vw] -left-[0.21vw] w-[0.052vw] h-[1.56vw] rotate-[53deg] bg-primary-black"></div>
+                <div className="absolute bottom-[-0.052vw] -left-[0.21vw] w-[0.052vw] h-[1.56vw] rotate-[-42deg] bg-primary-black"></div>
+                <div className="absolute top-[0.052vw] -right-[0.21vw] w-[0.052vw] h-[1.56vw] rotate-[-31deg] bg-primary-black"></div>
+                <div className="absolute top-[0.104vw] -right-[0.21vw] w-[0.052vw] h-[1.56vw] rotate-[55deg] bg-primary-black"></div>
                 <div className="relative">
-                  <div 
-                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[161px] h-[80px] transition-opacity duration-300`}
+                  <div
+                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[8.385vw] h-[4.17vw] transition-opacity duration-300`}
                     style={{
                       background: `url(${God_ray})`,
-                      backgroundSize: '161px 87px',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: "8.385vw 4.53vw",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
                       zIndex: -1,
-                      opacity: hoveredButton === 'projects' ? 1 : 0,
-                      transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
-                      transform: hoveredButton === 'projects' 
-                        ? 'translate(-50%, -50%) scale(1)' 
-                        : 'translate(-50%, -50%) scale(0.95)'
-                    }} 
+                      opacity: hoveredButton === "projects" ? 1 : 0,
+                      transition:
+                        "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
+                      transform:
+                        hoveredButton === "projects"
+                          ? "translate(-50%, -50%) scale(1)"
+                          : "translate(-50%, -50%) scale(0.95)",
+                    }}
                   />
                   Проекты
                 </div>
@@ -178,7 +194,7 @@ const Nav: React.FC = () => {
 export default Nav;
 
 // Добавляем keyframes для анимации
-const style = document.createElement('style');
+const style = document.createElement("style");
 style.textContent = `
   @keyframes fadeIn {
     from {

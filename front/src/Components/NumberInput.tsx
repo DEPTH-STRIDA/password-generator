@@ -32,18 +32,18 @@ const NumberInput: React.FC<NumberInputProps> = ({ value, onChange, maxValue }) 
   };
 
   return (
-    <div className="flex flex-row justify-start items-center gap-[16px] relative z-50">
+    <div className="flex flex-row justify-start items-center gap-[0.83vw] relative z-50">
       <input
         type="number"
         value={value || ''} // Показываем пустую строку вместо 0
         onChange={handleChange}
-        className="w-[55px] h-[25px] bg-primary-gray rounded-[6px] text-primary-white 
-        font-normal font-Troika text-[20px] flex justify-center items-center text-center relative
+        className="w-[2.86vw] h-[1.3vw] bg-primary-gray rounded-[0.31vw] text-primary-white 
+        font-normal font-Troika text-[1.04vw] flex justify-center items-center text-center relative
         [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
         focus:outline-none focus:ring-2 focus:ring-primary-green"
       />
       {showHint && (
-        <p className="text-primary-red font-normal font-Troika text-[20px]">
+        <p className="text-primary-red font-normal font-Troika text-[1.04vw]">
           МАКСИМУМ {maxValue}
         </p>
       )}

@@ -27,7 +27,7 @@ const CharacterButton: React.FC<CharacterButtonProps> = ({
     <div
       onClick={handleClick}
       onMouseEnter={() => !isEnabled && onHover?.()}
-      className={`w-[30px] h-[30px] rounded-[6px] font-Troika text-[20px] text-primary-white 
+      className={`w-[1.56vw] h-[1.56vw] rounded-[0.31vw] font-Troika text-[1.04vw] text-primary-white 
       flex justify-center items-center transition-all duration-300 ease-in-out cursor-pointer
       ${isActive ? 'bg-primary-green' : 'bg-primary-gray'} 
       ${isEnabled ? 'hover:scale-110' : 'opacity-50 cursor-not-allowed'}`}
