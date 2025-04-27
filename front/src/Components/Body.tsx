@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {
-  random_static_header,
-  voronoi_falt_header,
-  grung,
-  marble,
-} from "../assets/img";
+import { marble } from "../assets/img";
 import PasswordItem from "./PasswordItem";
 import CustomCheckbox from "./CustomCheckbox";
 import NumberInput from "./NumberInput";
 import CharacterButton from "./CharacterButton";
+import {
+  generatePassword,
+  generatePasswords,
+} from "../utils/passwordGenerator";
 
 const SPECIAL_CHARS_ROW1 = ["!", "#", "$", "%", "&", "(", ")", "*", "+"];
 const SPECIAL_CHARS_ROW2 = [".", "/", ":", ";", "=", ">", "?", "@", "["];
@@ -40,6 +39,11 @@ const Body: React.FC = () => {
   );
   const [isWarningVisible, setIsWarningVisible] = useState(false);
 
+  const [previewPassword, setPreviewPassword] = useState("");
+  const [generatedPasswords, setGeneratedPasswords] = useState<string[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [showPasswords, setShowPasswords] = useState(false);
+
   // Обработка включения/выключения специальных символов
   useEffect(() => {
     if (checkboxStates.special) {
@@ -50,6 +54,21 @@ const Body: React.FC = () => {
       setSavedActiveChars(new Set(activeChars));
     }
   }, [checkboxStates.special]);
+
+  // Обновляем превью пароля при изменении настроек
+  useEffect(() => {
+    const options = {
+      length: passwordLength,
+      uppercase: checkboxStates.uppercase,
+      lowercase: checkboxStates.lowercase,
+      numbers: checkboxStates.numbers,
+      specialChars: activeChars,
+      useSpecialChars: checkboxStates.special,
+    };
+
+    const newPreview = generatePassword(options);
+    setPreviewPassword(newPreview);
+  }, [passwordLength, checkboxStates, activeChars]);
 
   const handleWarning = () => {
     setIsWarningVisible(true);
@@ -86,8 +105,37 @@ const Body: React.FC = () => {
     }));
   };
 
+  const handleGenerate = async () => {
+    setIsGenerating(true);
+    setShowPasswords(false);
+    setGeneratedPasswords([]);
+
+    // Небольшая задержка для анимации
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    const options = {
+      length: passwordLength,
+      uppercase: checkboxStates.uppercase,
+      lowercase: checkboxStates.lowercase,
+      numbers: checkboxStates.numbers,
+      specialChars: activeChars,
+      useSpecialChars: checkboxStates.special,
+    };
+
+    const passwords = generatePasswords(options, passwordCount);
+
+    // Анимированное появление паролей
+    setShowPasswords(true);
+    for (let i = 0; i < passwords.length; i++) {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      setGeneratedPasswords((prev) => [...prev, passwords[i]]);
+    }
+
+    setIsGenerating(false);
+  };
+
   return (
-    <div className="bg-primary-black h-full w-full">
+    <div className="bg-primary-black min-h-[100vh] w-full">
       <div
         className="fixed left-0 right-0 bottom-0 mix-blend-overlay opacity-[85%] z-0
         top-[130px]"
@@ -252,37 +300,44 @@ const Body: React.FC = () => {
           </div>
           <div className="flex justify-center items-center w-full">
             <button
-              className="bg-primary-red text-primary-white font-Troika font-black 
-          text-[28px] uppercase px-[20px] py-[10px]  rounded-[6px] mt-[28px]"
+              onClick={handleGenerate}
+              disabled={isGenerating}
+              className={`bg-primary-red text-primary-white font-Troika font-black 
+                text-[28px] uppercase px-[20px] py-[10px] rounded-[6px] mt-[28px]
+                transition-all duration-300 ease-in-out
+                ${
+                  isGenerating
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:scale-105"
+                }`}
             >
-              СГЕНЕРИРОВАТЬ
+              {isGenerating ? (
+                <div className="animate-spin rounded-full h-6 w-6 border-4 border-primary-white border-t-transparent" />
+              ) : (
+                "СГЕНЕРИРОВАТЬ"
+              )}
             </button>
           </div>
         </div>
         <div className="flex flex-col justify-center items-start">
           <div className="flex flex-col justify-center items-center">
-            <h2
-              className="uppercase text-primary-white font-normal font-Troika
-          text-[32px]"
-            >
+            <h2 className="uppercase text-primary-white font-normal font-Troika text-[32px]">
               Будет сгенерирован пароль вида
             </h2>
-            <PasswordItem password="^q%1'*Cn.m" />
+            <PasswordItem password={previewPassword} />
           </div>
 
-          <div
-            className="flex flex-row justify-start items-center
-           flex-wrap mt-[36px] gap-[16px] max-w-[930px]"
-          >
-            <PasswordItem password="^q%1'*Cn.m1212121212121212121212" />
-            <PasswordItem password="^q%1'*m1212121212121212121212.m" />
-            <PasswordItem password="^q%1'*m1212121212121212121212.m" />
-            <PasswordItem password="^q%1'*n.m" />
-            <PasswordItem password="^q%1'*Cm1212121212121212121212n.m" />
-            <PasswordItem password="^q%1'*Cm1212121212121212121212n.m" />
-            <PasswordItem password="^q%1'*Cm1212121212121212121212n.m" />
-            <PasswordItem password="^q%1'*Cm1212121212121212121212n.m" />
-            <PasswordItem password="^q%1'*Cm1212121212121212121212n.m" />
+          <div className="flex flex-row justify-start items-center flex-wrap mt-[36px] gap-[16px] w-[930px]">
+            {showPasswords &&
+              generatedPasswords.map((password, index) => (
+                <div
+                  key={index}
+                  className="animate-fadeIn"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <PasswordItem password={password} />
+                </div>
+              ))}
           </div>
         </div>
       </div>

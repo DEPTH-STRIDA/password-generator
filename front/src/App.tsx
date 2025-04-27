@@ -5,7 +5,7 @@ const App: React.FC = () => {
 
 
   return (
-    <div className="h-screen flex w-screen flex-col">
+    <div className="flex flex-col overflow-x-hidden">
       <Nav />
       <Body></Body>
     </div>
