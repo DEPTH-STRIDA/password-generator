@@ -2,13 +2,14 @@ import React, { useState } from "react";
 
 interface PasswordItemProps {
   password: string;
+  fixedWidth?: number;
 }
 
-const PasswordItem: React.FC<PasswordItemProps> = ({ password }) => {
+const PasswordItem: React.FC<PasswordItemProps> = ({ password, fixedWidth }) => {
   const [showCopied, setShowCopied] = useState(false);
 
   const truncatedPassword =
-    password.length > 30 ? `${password.slice(0, 30)}...` : password;
+    password.length > 20 ? `${password.slice(0, 20)}...` : password;
 
   const handleCopy = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -24,13 +25,19 @@ const PasswordItem: React.FC<PasswordItemProps> = ({ password }) => {
   return (
     <div className="relative group">
       <div
-        className={`uppercase text-primary-white font-normal font-Troika
+        className={`uppercase text-primary-white font-normal font-Troika whitespace-nowrap
           ${
             password.length > 30 ? "text-[1.25vw]" : "text-[1.67vw]"
           } py-[0.36vw] px-[1.25vw] bg-primary-gray rounded-[0.31vw] 
-          z-10 hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer`}
+          z-10 hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer overflow-hidden`}
         onClick={handleCopy}
-        title={password.length > 30 ? password : undefined}
+        title={password.length > 23 ? password : undefined}
+        style={fixedWidth ? { 
+          width: fixedWidth + 'px', 
+          display: 'inline-block', 
+          textAlign: 'center',
+          paddingRight: password.length > 23 ? '3vw' : '1.25vw'
+        } : undefined}
       >
         {truncatedPassword}
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { marble } from "../assets/img";
 import PasswordItem from "./PasswordItem";
 import CustomCheckbox from "./CustomCheckbox";
@@ -43,6 +43,8 @@ const Body: React.FC = () => {
   const [generatedPasswords, setGeneratedPasswords] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPasswords, setShowPasswords] = useState(false);
+  const [maxWidth, setMaxWidth] = useState<number | undefined>(undefined);
+  const measureRef = useRef<HTMLDivElement>(null);
 
   // Обработка включения/выключения специальных символов
   useEffect(() => {
@@ -69,6 +71,14 @@ const Body: React.FC = () => {
     const newPreview = generatePassword(options);
     setPreviewPassword(newPreview);
   }, [passwordLength, checkboxStates, activeChars]);
+
+  // Измеряем ширину самого длинного пароля
+  useLayoutEffect(() => {
+    if (measureRef.current && showPasswords && generatedPasswords.length > 0) {
+      const width = measureRef.current.offsetWidth;
+      setMaxWidth(width);
+    }
+  }, [showPasswords, generatedPasswords]);
 
   const handleWarning = () => {
     setIsWarningVisible(true);
@@ -148,7 +158,18 @@ const Body: React.FC = () => {
         }}
       />
 
-      <div className="flex justify-center items-start z-30 mt-[0.78vw] gap-[7.91vw] relative">
+      {/* Невидимый элемент для измерения */}
+      <div style={{ position: 'absolute', visibility: 'hidden', pointerEvents: 'none' }}>
+        <div ref={measureRef}>
+          <PasswordItem 
+            password={generatedPasswords.reduce((a, b) => 
+              a.length >= b.length ? a : b, ''
+            )} 
+          />
+        </div>
+      </div>
+
+      <div className="flex justify-center items-start z-30 mt-[0.78vw] ml-[20vw] gap-[7.91vw] relative">
         <div className="flex flex-col justify-center items-start relative">
           <div className="relative">
             <div className="absolute top-[50%] left-[-1.82vw] w-[21.15vw] h-[0.052vw] bg-primary-green"></div>
@@ -324,18 +345,15 @@ const Body: React.FC = () => {
             <h2 className="uppercase text-primary-white font-normal font-Troika text-[1.67vw]">
               Будет сгенерирован пароль вида
             </h2>
-            <PasswordItem password={previewPassword} />
+            <PasswordItem password={previewPassword} fixedWidth={maxWidth} />
           </div>
 
-          <div className="flex flex-row justify-start items-center flex-wrap mt-[1.88vw] gap-[0.83vw] w-[48.44vw]">
+          <div className="flex flex-row justify-start items-start
+           flex-wrap mt-[1.88vw] gap-[0.83vw] w-[50vw] ml-[6vw] pb-[1vw]">
             {showPasswords &&
               generatedPasswords.map((password, index) => (
-                <div
-                  key={index}
-                  className="animate-fadeIn"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <PasswordItem password={password} />
+                <div key={index} className="animate-fadeIn" style={{ animationDelay: `${index * 50}ms` }}>
+                  <PasswordItem password={password} fixedWidth={maxWidth} />
                 </div>
               ))}
           </div>

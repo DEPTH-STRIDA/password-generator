@@ -21,6 +21,16 @@ export default defineConfig({
   },
   build: {
     outDir: 'build',
-    emptyOutDir: true
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
+      }
+    }
+  },
+  define: {
+    'process.env.VITE_APP_VERSION': JSON.stringify(Date.now())
   }
 });
