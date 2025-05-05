@@ -23,9 +23,9 @@ const PasswordItem: React.FC<PasswordItemProps> = ({ password, fixedWidth }) => 
   };
 
   return (
-    <div className="relative group">
+    <div className="relative group !normal-case">
       <div
-        className={`uppercase text-primary-white font-normal font-Troika whitespace-nowrap
+        className={`text-primary-white font-normal font-Cydre  whitespace-nowrap !normal-case
           ${
             password.length > 30 ? "text-[1.25vw]" : "text-[1.67vw]"
           } py-[0.36vw] px-[1.25vw] bg-primary-gray rounded-[0.31vw] 
