@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://password-generator.golang-developer.ru/sitemap.xml
-
-# Disallow potentially sensitive areas
-Disallow: /api/
-Disallow: /admin/
-Disallow: /private/ 
